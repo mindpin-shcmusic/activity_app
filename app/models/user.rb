@@ -1,5 +1,9 @@
 class User < ActiveRecord::Base
   include UserAuthMethods
+  include ActivityAssign::UserMethods
+  include Activity::UserMethods
+  include Student::UserMethods
+  include Teacher::UserMethods
   
   has_one :online_record, :dependent => :destroy
   

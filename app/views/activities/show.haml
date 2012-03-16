@@ -1,0 +1,11 @@
+%div
+  =@activity.title
+%div
+  =@activity.content
+%div 活动时间 #{@activity.hold_date.strftime("%Y年 %m月 %d日")}
+%div 参与者列表
+%div
+  -@activity.participants.each do |user|
+    %div=user.name
+
+=link_to "返回","/activities"

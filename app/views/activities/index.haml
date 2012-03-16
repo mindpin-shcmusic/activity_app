@@ -1,0 +1,27 @@
+:css
+  .fleft {
+    float:left;
+  }
+  .w100 {
+    width:100px;
+  }
+  .strong {
+    font-weight: bold;
+  }
+
+-if current_user.is_teacher?
+  =link_to "创建教学活动","/activities/new"
+-else
+  %div 你不是老师，无法创建教学活动
+  
+%div
+  %div 本周的教学活动
+  -@week_activities_data.each_with_index do |hash,index|
+    %div{:class=>"fleft w100"}
+      %div=hash[:date]
+      %div 星期 #{index+1}
+      %div
+        -hash[:activities].each do |activity|
+          %div{:class=>"#{activity.creator == current_user ? "strong" : ""}"}
+            =link_to activity.title, "/activities/#{activity.id}"
+		

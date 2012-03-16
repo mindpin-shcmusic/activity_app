@@ -10,5 +10,5 @@ ActivityApp::Application.routes.draw do
   post '/signup_submit' => 'signup#form_submit'
   
   # -- 以下可以自由添加其他 routes 配置项
-  
+  resources :activities
 end

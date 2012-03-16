@@ -1,0 +1,21 @@
+=flash[:error]
+=form_for @activity do |f|
+  %div
+    %label 活动标题
+  %div
+    =f.text_field :title
+  %div
+    %label 活动描述
+  %div=f.text_area :content
+  %div
+    %label 活动时间（例如：20120318）
+  %div=f.text_field :date
+  %div
+    %label 指定参与者
+  %div
+    -User.all.each do |user|
+      %span
+        =check_box_tag("activity[assign_participant_ids][]",user.id)
+        %label=user.real_name
+  %div
+    =f.submit "创建"
