@@ -13,7 +13,7 @@ student 和 teacher 模型是为了开发原型用，整合时忽略掉
   activities
     string :title
     text   :content
-    string  :date   # 比如 "20120317"
+    integer  :date   # 比如 "20120317"
     integer :creator_id
     
   activity_assign
