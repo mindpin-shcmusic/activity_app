@@ -3,7 +3,7 @@ class Activity < ActiveRecord::Base
   belongs_to :creator, :class_name => "User", :foreign_key => :creator_id
   has_many :activity_assigns
   has_many :participants, :through => :activity_assigns, :source => :user
-  attr_accessor :assign_participant_ids
+  accepts_nested_attributes_for :activity_assigns
   
   # --- 模型验证
   validates :title, :content, :date, :creator, :presence => true
@@ -30,17 +30,9 @@ class Activity < ActiveRecord::Base
   # 活动至少有一个参与者
   validate :check_at_least_one_participant
   def check_at_least_one_participant
-    ids = (self.assign_participant_ids||[]).map{|id|User.find_by_id(id)}.compact.map{|user|user.id}
-    self.assign_participant_ids = ids
-    if self.assign_participant_ids.blank?
-      errors.add(:assign_participant_ids ,"活动至少有一个参与者")
+    if self.activity_assigns.blank?
+      errors.add(:participants ,"活动至少有一个参与者")
     end
-  end
-  
-  # 保存后的回调，设置教学活动的参与者
-  after_save :set_assign_participant
-  def set_assign_participant
-    self.participant_ids = self.assign_participant_ids
   end
   
   def hold_date

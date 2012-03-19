@@ -15,7 +15,7 @@
   %div
     -User.all.each do |user|
       %span
-        =check_box_tag("activity[assign_participant_ids][]",user.id)
+        =check_box_tag("activity[activity_assigns_attributes][][user_id]",user.id)
         %label=user.real_name
   %div
     =f.submit "创建"
