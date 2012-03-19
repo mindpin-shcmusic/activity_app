@@ -20,8 +20,8 @@ class Activity < ActiveRecord::Base
   validate :check_date_format
   def check_date_format
     if !self.date.blank?
-      str = Time.parse(self.date).strftime("%Y%m%d")
-      if str != self.date
+      str = Time.parse(self.date.to_s).strftime("%Y%m%d")
+      if str != self.date.to_s
         errors.add(:date,"date 的格式不正确") 
       end
     end
@@ -44,7 +44,7 @@ class Activity < ActiveRecord::Base
   end
   
   def hold_date
-    Time.parse(self.date)
+    Time.parse(self.date.to_s)
   end
   
   module UserMethods
@@ -91,7 +91,7 @@ class Activity < ActiveRecord::Base
       friday = monday+4.day
       saturday = monday+5.day
       sunday = monday+6.day
-      [monday,tuesday,wednesday,thursday,friday,saturday,sunday].map{|time|time.strftime("%Y%m%d")}
+      [monday,tuesday,wednesday,thursday,friday,saturday,sunday].map{|time|time.strftime("%Y%m%d").to_i}
     end
   end
 end

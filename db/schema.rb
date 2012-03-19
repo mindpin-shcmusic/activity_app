@@ -10,12 +10,12 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120316034718) do
+ActiveRecord::Schema.define(:version => 20120319063713) do
 
   create_table "activities", :force => true do |t|
     t.string   "title"
     t.text     "content"
-    t.string   "date"
+    t.integer  "date"
     t.integer  "creator_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -52,6 +52,23 @@ ActiveRecord::Schema.define(:version => 20120316034718) do
     t.text     "content"
     t.integer  "reply_comment_id"
     t.integer  "reply_comment_user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "homework_assigns", :force => true do |t|
+    t.integer  "creator_id"
+    t.integer  "homework_id"
+    t.text     "content"
+    t.boolean  "is_submit",   :default => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "homeworks", :force => true do |t|
+    t.integer  "creator_id"
+    t.string   "title"
+    t.text     "content"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -116,6 +133,15 @@ ActiveRecord::Schema.define(:version => 20120316034718) do
     t.string   "real_name",  :default => "", :null => false
     t.string   "tid"
     t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "todos", :force => true do |t|
+    t.integer  "creator_id"
+    t.text     "content"
+    t.integer  "date"
+    t.boolean  "completed",  :default => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
